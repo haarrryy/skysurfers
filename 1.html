@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hot Air Balloon Rides</title>  
+    <style>
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+  
+      body, html {
+        font-family: Arial, sans-serif;
+        scroll-behavior: smooth;
+        height: 100%;
+        color: white;
+      }
+  
+      .hero {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+      }
+  
+      .hero video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+      }
+  
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background: rgba(0, 0, 0, 0.5);
+      }
+  
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+      }
+  
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+  
+      .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+  
+      .hero-text {
+        position: absolute;
+        top: 40%;
+        left: 10%;
+        max-width: 500px;
+      }
+  
+      .hero-text h2 {
+        font-size: 48px;
+        margin-bottom: 10px;
+      }
+  
+      .hero-text p {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+      
+      #about .about-text {
+        flex: 1;
+        min-width: 300px;
+        text-align: left;
+      }
+      
+
+      #about {
+        padding: 40px;
+        background-color: #f9f9f9;
+      }
+
+      .about-container {
+        max-width: 1200px;
+        margin: auto;
+        text-align: center;
+      }
+
+      .about-container h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: #222;
+      }
+
+      .about-container p {
+        font-size: 16px;
+        color: #444;
+        margin-bottom: 40px;
+      }
+
+      .about-boxes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .about-box {
+        flex: 1;
+        min-width: 280px;
+        max-width: 32%;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .about-box:hover {
+        transform: translateY(-5px);
+      }
+
+      .about-box img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+
+      .about-box h2 {
+        margin-top: 15px;
+        font-size: 20px;
+        color: #111;
+      }
+
+      .about-box p {
+        font-size: 14px;
+        color: #555;
+      }
+
+
+      #services {
+        background: url('') no-repeat center center / cover;
+        padding: 60px 20px;
+      }
+  
+      .service-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+      }
+  
+      .service-card {
+        background: rgba(235, 236, 232, 0);
+        color: black;
+        border: 2px solid #000000;
+        border-radius: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        padding: 20px;
+        max-width: 300px;
+        transition: transform 0.3s ease;
+      }
+      
+      .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 16px rgba(255, 77, 77, 0.5);
+      }
+  
+      .service-card h3 {
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+  
+      .service-card ul {
+        padding-left: 20px;
+        margin-bottom: 20px;
+      }
+  
+      .book-red {
+        background-color: rgb(207, 6, 6);
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        display: inline-block;
+        align-items: center;
+      }
+  
+      .book-red:hover {
+        background-color: darkred;
+      }
+  
+      .btn {
+        padding: 12px 25px;
+        background: crimson;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+      }
+      
+          /* Booking Section */
+    #contact {
+      background-color: #f0deb3;
+      background: url('8.jpg') no-repeat center center / cover;
+      text-align: center;
+    }
+  
+
+    #contact img {
+      max-width: 80%;
+      height: auto;
+      margin-bottom: 30px;
+    }
+
+    .booking-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .booking-form {
+      max-width: 500px;
+      width: 100%;
+      color:white;
+      background: #f1995a52;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+
+    .booking-form form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .booking-form label {
+      margin-top: 15px;
+      text-align: left;
+    }
+
+    .booking-form input,
+    .booking-form select,
+    .booking-form textarea {
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .btn {
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #e67e39;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #d62828;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      background-image: url('10.jpg');
+      background-size: cover;
+      background-position: center;
+      color: white;
+    }
+
+    .faq-section h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+      color: black;
+    }
+
+    .accordion-item {
+      max-width: 800px;
+      margin: 0 auto 20px auto;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      width: 100%;
+      background: #ffb703;
+      color: black;
+      padding: 15px;
+      font-size: 18px;
+      cursor: pointer;
+      text-align: left;
+      border: none;
+      outline: none;
+    }
+
+    .accordion-body {
+      padding: 15px;
+      display: none;
+    }
+
+    .accordion-body p {
+      margin: 0;
+    }
+
+    .accordion-item.active .accordion-body {
+      display: block;
+    }
+  
+    /* End FAQ Section */
+    /*promotio*/
+    .events-section {
+  padding: 30px 20px;
+  background: #f8f8f8;
+  text-align: center;
+}
+
+.events-section h2 {
+  font-size: 36px;
+  color: #000;
+  margin-bottom: 30px;
+}
+
+.events-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.event-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  max-width: 300px;
+  padding: 20px;
+  color: #000;
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.event-card:hover {
+  transform: scale(1.03);
+}
+
+.event-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.event-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.event-card p {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.event-card a {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #ff4d4d;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.event-card a:hover {
+  background: #e60000;
+}
+
+
+/*last */
+.contact-safety-section {
+  padding: 40px 20px;
+  background: #fefefe;
+}
+
+.contact-safety-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+}
+
+.contact-box,
+.safety-box {
+  flex: 1 1 45%;
+  min-width: 300px;
+}
+
+/* Contact Box */
+
+.contact-box .contact-bg {
+  background-image: url('66.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  padding: 30px;
+  border-radius: 12px;
+  color: white;
+  height: 100%;
+}
+
+.contact-box h2 {
+  margin-bottom: 20px;
+  color: #000;
+}
+
+.contact-box p {
+  margin-bottom: 10px;
+  color: #000;
+  font-size: 15px;
+}
+
+.contact-box a {
+  color: #e60000;
+  text-decoration: none;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.contact-form button {
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background: #e60000;
+}
+
+/* Safety Box */
+.safety-box .safety-bg {
+  background-image: url('7.jpg'); /* Replace with your image path */
+  background-size: cover;
+  background-position: center;
+  padding: 30px;
+  border-radius: 12px;
+  color: white;
+  height: 100%;
+}
+
+.safety-content {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.safety-content h2 {
+  margin-bottom: 15px;
+}
+
+.safety-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.safety-content ul li {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+      section {
+        padding: 40px 20px;
+        text-align: center;
+        background: #111;
+      }
+  
+      footer {
+        background: #ffffff;
+        color: rgb(0, 0, 0);
+        text-align: center;
+        padding: 20px;
+      }
+    </style>
+
+  <header class="hero">
+    <!-- Background Video -->
+    <video autoplay muted loop>
+      <source src="BALLON.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">Sky Surfers</div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Packages</a></li>
+        <li><a href="#contact">Book a Ride</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#contact-safety">Contact Us</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Text -->
+    <div class="hero-text">
+      <h2>Your Escape Above the Clouds!</h2>
+      <p>Take your imagination to the skies with the first-of-its-kind Hot Air Balloon Ride in Islamabad and Rawalpindi. Enjoy the scenic beauty of the capital from above with friends, family, or your special someone</p>
+     <br>
+      <a href="#contact" class="btn">Book a Ride</a>
+    </div>
+  </header>
+
+
+  <section id="about" style="padding: 40px; background-color: #f9f9f9;">
+    <div class="about-container" style="max-width: 1200px; margin: auto; text-align: center;">
+      <h1>About Us</h1>
+      <p style="margin-bottom: 40px;">
+        Sky Surfers is Pakistan’s first recreational hot air balloon service, introducing a whole new adventure to the twin cities of Islamabad and Rawalpindi.
+      </p>
+  
+      <div class="about-boxes" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
+        
+        <!-- Box 1: About -->
+        <div class="about-box" style="flex: 1; min-width: 280px; max-width: 32%; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+          <img src="44.jpg" alt="Sky Surfers" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px;">
+          <h2 style="margin-top: 15px;">Who We Are</h2>
+          <br><p>Certified pilots, top-tier equipment, and a passion for flight to give you a smooth and magical journey.</p>
+        </div>
+  
+        <!-- Box 2: Mission -->
+        <div class="about-box" style="flex: 1; min-width: 280px; max-width: 32%; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+          <img src="55.jpg" alt="Our Mission" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px;">
+          <h2 style="margin-top: 15px;">Our Mission</h2>
+          <br><p>Deliver safe, joyful, and professional flights that promote community growth and tourism in Pakistan.</p>
+        </div>
+  
+        <!-- Box 3: Vision -->
+        <div class="about-box" style="flex: 1; min-width: 280px; max-width: 32%; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+          <img src="66.jpg" alt="Our Vision" style="width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px;">
+          <h2 style="margin-top: 15px;">Our Vision</h2>
+          <br><p>To redefine leisure in Pakistan with safe and exciting hot air balloon experiences unlike any other.</p>
+        </div>
+  
+      </div>
+    </div>
+  </section>
+  
+  <!-- Packages Section -->
+  <section id="services" style="background: url('33.jpg') no-repeat center center / cover; padding: 60px 20px;">
+    <h2 style="font-size: 40px; margin-bottom: 10px; color: black;">Our Packages</h2>
+    <p style="font-size: 18px; margin-bottom: 40px; color: rgb(0, 0, 0);">We offer a variety of hot air balloon ride experiences:</p>
+  
+    <div class="service-cards">
+      <div class="service-card">
+        <h3>🎈 Shared Balloon Rides</h3>
+        <ul>
+          <li>Ride with other adventure lovers.</li>
+          <li>Capacity: 15–18 people.</li>
+          <li>Price: PKR 2,500 per person.</li>
+          <li>Location: F-9 Park, Islamabad.</li>
+          <li>Free snacks on request.</li>
+        </ul>
+        <a href="#contact" class="book-red">Book Now</a>
+      </div>
+  
+      <div class="service-card">
+        <h3>💑 Private Balloon Rides (O-77)</h3>
+        <ul>
+          <li>For couples or small groups (2–4 people).</li>
+          <li>Price: PKR 4,000 per person.</li>
+          <li>Ideal for romantic rides and surprises.</li>
+        </ul>
+        <a href="#contact" class="book-red">Book Now</a>
+      </div>
+  
+      <div class="service-card">
+        <h3>🎂 Birthday Package (A-177 & A-250)</h3>
+        <ul>
+          <li>Price: PKR 20,000.</li>
+          <li>Includes decorated basket, drinks, and a surprise gift.</li>
+        </ul>
+        <a href="#contact" class="book-red">Book Now</a>
+      </div>
+  
+      <div class="service-card">
+        <h3>💍 Wedding Proposal Package (O-77)</h3>
+        <ul>
+          <li>Price: PKR 15,000.</li>
+          <li>Includes music, decorations, and refreshments.</li>
+        </ul>
+        <a href="#contact" class="book-red">Book Now</a>
+      </div>
+  
+      <div class="service-card">
+        <h3>🛠️ Custom Packages</h3>
+        <ul>
+          <li>Want something special? Call us to design your own ride.</li>
+          <li>Prices vary based on requests.</li>
+        </ul>
+        <a href="#contact" class="book-red">Book Now</a>
+      </div>
+    </div>
+  </section>
+  
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="accordion-item">
+        <button class="accordion-header">Is it safe to ride a hot air balloon?</button>
+        <div class="accordion-body">
+          <p>Yes! Our flights are conducted by licensed pilots using certified equipment, and all safety protocols are strictly followed.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header">Where are the rides located?</button>
+        <div class="accordion-body">
+          <p>All flights take place at F-9 Park, Islamabad. Exact meetup locations will be shared upon booking confirmation.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header">What should I wear?</button>
+        <div class="accordion-body">
+          <p>Wear comfortable clothes and closed shoes. It can be slightly cooler at higher altitudes, so a light jacket is recommended.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-header">Can children ride too?</button>
+        <div class="accordion-body">
+          <p>Yes, children above the age of 5 are allowed with adult supervision. Children under 5 are not permitted for safety reasons.</p>
+        </div>
+      </div>
+    </section>
+  
+  <!-- Contact / Booking Section -->
+   
+  <section id="contact">
+    <h2 style="font-size: 36px;">Book Your Ride</h2>
+    <p style="font-size: 18px; margin-bottom: 40px; color: rgb(255, 255, 255);">Want to fly? Book your spot now!</p>
+    <div class="booking-container">
+      
+      <div class="booking-form">
+        <form>
+          <label for="name">Full Name:</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="phone">Phone Number:</label>
+          <input type="tel" id="phone" name="phone" required>
+
+          <label for="package">Select Package:</label>
+          <select id="package" name="package" required>
+            <option value="">-- Select --</option>
+            <option value="shared">Shared Ride</option>
+            <option value="private">Private Ride</option>
+            <option value="birthday">Birthday Package</option>
+            <option value="proposal">Proposal Package</option>
+            <option value="custom">Custom Package</option>
+          </select>
+
+          <label for="date">Preferred Date:</label>
+          <input type="date" id="date" name="date" required>
+
+          <label for="message">Additional Notes:</label>
+          <textarea id="message" name="message" rows="4"></textarea>
+
+          <button type="submit" class="btn">Submit Booking</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section id="events" class="events-section">
+    <h2> Events & Promotions</h2>
+    <div class="events-container">
+      
+      <!-- Event 1 -->
+      <div class="event-card">
+        <img src="bal1.jpg" alt="Balloon Carnival" />
+        <h3>Balloon Carnival – Coming Soon!</h3>
+        <p>Get ready for an unforgettable adventure in the skies! Stay tuned for dates and surprises.</p>
+        <a href="https://www.oneoswestry.co.uk/featured/oswestry-balloon-carnival-2025-a-spectacular-weekend-of-family-fun/" target="_blank">Read More</a>
+      </div>
+  
+      <!-- Event 2 -->
+      <div class="event-card">
+        <img src="heart.jpg" alt="Valentine’s Day Offer" />
+        <h3>Valentine’s Day Offer</h3>
+        <p>Book a romantic ride and enjoy complimentary decoration for you and your loved one.</p>
+        <a href="https://www.oceaniahotels.com/en/oh-le-magazine/holidays-idea-family-trip" target="_blank">Learn More</a>
+      </div>
+  
+      <!-- Event 3 -->
+      <div class="event-card">
+        <img src="hand.jpg" alt="Business Promotions" />
+        <h3>Advertise with Us</h3>
+        <p>Showcase your brand from the skies! Promote your business on our balloon banners.</p>
+        <a href="https://flyawayballooning.com/blogs/guides-tips-tricks/the-benefits-of-balloon-branding" target="_blank">See Details</a>
+      </div>
+  
+    </div>
+  </section>
+  
+  <section id="contact-safety" class="contact-safety-section">
+    <div class="contact-safety-container">
+
+      <!-- Contact Us Section -->
+      <div class="contact-box">
+      <div class="contact-bg">
+        <h2>📞 Contact Us</h2>
+        <p><strong>Sky Surfers Office</strong> – F-9 Park, Islamabad</p>
+        <p><strong>Email:</strong> <a href="mailto:info@skysurfers.pk">info@skysurfers.pk</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+923336069557">+92-3336069557</a></p>
+  
+        <form action="#" method="POST" class="contact-form">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+      </div>
+  
+      <!-- Safety & Legal Section -->
+      <div class="safety-box">
+        <div class="safety-bg">
+          <div class="safety-content">
+            <h2> Safety & Legal</h2>
+            <ul>
+              <li>✅ All riders must sign a risk acknowledgment form before flying.</li>
+              <li>✅ Free medical check-up by our onboard doctor before flights.</li>
+              <li>✅ Licensed by: Pakistan Civil Aviation Authority (PCAA)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer><strong>
+    <p>&copy; 2025 Sky Surfers Pvt. Ltd. | All rights reserved  <br>
+Developed by: Harram Habib</strong><br>
+    </p>
+  </footer>
+</body>
+ <!-- Simple JS to toggle FAQ -->
+ <script>
+  document.querySelectorAll('.accordion-header').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      item.classList.toggle('active');
+    });
+  });
+</script>
+</html>
